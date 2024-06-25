@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, HostBinding, HostListener, Input, ViewEncapsulation, inject } from '@angular/core';
 
 @Component({
   selector: 'app-control',
@@ -6,8 +6,24 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
   imports: [],
   templateUrl: './control.component.html',
   styleUrl: './control.component.css',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  host: {
+    class: 'control',
+    '(click)': 'onClick()'
+  }
+
 })
 export class ControlComponent {
   @Input({required: true}) label!: string;
+  //@HostListener('click') 
+  //@HostBinding('class') className = 'control';
+
+  private el = inject(ElementRef)
+
+  onClick(){
+    console.log('clicked');
+    console.log(this.el);
+  }
+
+  
 }
