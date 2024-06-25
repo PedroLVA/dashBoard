@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-server',
@@ -7,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './server.component.html',
   styleUrl: './server.component.css'
 })
-export class ServerComponent implements OnInit {
+export class ServerComponent implements OnInit, OnDestroy {
   currentStatus: 'online' | 'offline' | 'unknown' = 'online';
+  private interval?: ReturnType<typeof setInterval>;
 
   constructor(){
   }
@@ -27,5 +28,9 @@ export class ServerComponent implements OnInit {
         
       }
     }, 5000)
+  }
+
+  ngOnDestroy(){
+    clearTimeout(this.interval)
   }
 }
