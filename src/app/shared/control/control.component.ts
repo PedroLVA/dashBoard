@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostBinding, HostListener, Input, ViewEncapsulation, inject } from '@angular/core';
+import { Component, ContentChild, ElementRef, HostBinding, HostListener, Input, ViewEncapsulation, inject } from '@angular/core';
 
 @Component({
   selector: 'app-control',
@@ -19,10 +19,12 @@ export class ControlComponent {
   //@HostBinding('class') className = 'control';
 
   private el = inject(ElementRef)
+  @ContentChild('input') private control?: ElementRef<HTMLInputElement | HTMLTextAreaElement>
 
   onClick(){
     console.log('clicked');
     console.log(this.el);
+    console.log(this.control);
   }
 
   
